@@ -1,0 +1,30 @@
+{
+  "name": "xnet-peer",
+  "version": "0.1.0",
+  "description": "Prototype peer node for token exchange serving web client.",
+  "engines": {
+    "node": "8.*"
+  },
+  "private": true,
+  "main": "target/node/index.js",
+  "types": "target/@types",
+  "scripts": {
+    "build": "tsc && webpack",
+    "start": "node target/node/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Emanuel Palm <emanuel.palm@ltu.se>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "body-reader": "^1.1.1",
+    "find-my-way": "^1.16.0",
+    "ws": "^6.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^8.10.36",
+    "@types/ws": "^6.0.1",
+    "typescript": "^3.1.3",
+    "webpack": "4.*",
+    "webpack-cli": "3.*"
+  }
+}

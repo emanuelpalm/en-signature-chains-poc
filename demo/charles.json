@@ -1,0 +1,60 @@
+{
+  "server": {
+    "port": 8084
+  },
+  "peer": {
+    "port": 8085
+  },
+  "me": {
+    "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANb1RMiYKjsaJlzXw35qJg5PWDPAUS3c\nQD8yZTcw6SMwy4o01NKGXtjxtWkjFB1Wug9Nki/zL0g0FPc9wNsBoCECAwEAAQ==\n-----END PUBLIC KEY-----",
+    "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIBOQIBAAJBANb1RMiYKjsaJlzXw35qJg5PWDPAUS3cQD8yZTcw6SMwy4o01NKG\nXtjxtWkjFB1Wug9Nki/zL0g0FPc9wNsBoCECAwEAAQJAa/nYC0skK3v/OTPIp396\njkWc8KHyJS81tokB/q867MlxZr/2WzkC4SX+NSGrU6gLzvr+nUIAk3FX5MKu4JWW\nYQIhAP/H0zSdKYUbHrCbuagy3rgeAtdAZ6g6KiwEMkzL5oaHAiEA1yR6aJERN1pX\naOBTNWCVAJTa5I2elMLfVNa37/VwphcCIHkE8slSEvMHgd3N0Gnkp7w1duKhdmoC\nGzH4SlRLpSbBAiACYh8RBXphWJjbSpDhaH5+ESgTnBYDo90BfZdwCxICZQIga7TG\n1pdOYcbOBITKfwOpptJb3z76fdYf6NLj/YY1Xiw=\n-----END RSA PRIVATE KEY-----",
+    "user": {
+      "name": "Charles",
+      "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANb1RMiYKjsaJlzXw35qJg5PWDPAUS3cQD8yZTcw6SMwy4o01NKGXtjxtWkjFB1Wug9Nki/zL0g0FPc9wNsBoCECAwEAAQ==",
+      "keyAlgorithm":"rsa",
+      "attributes": {
+        "country": "ES",
+        "region": "Biscay",
+        "locality": "Bilbao",
+        "organization": "Mondragen University"
+      }
+    }
+  },
+  "peers": [
+    {
+      "host": "localhost",
+      "port": 8081,
+      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANagwKZPn9RKqIX9Vr3QrqFRZUotFl06\nnx0I9NTiiFLcrp2zchtHiQ/dUq4IiSCuKQn+7vCKUZqUbT3lCks4YlsCAwEAAQ==\n-----END PUBLIC KEY-----",
+      "user": {
+        "name": "Alice",
+        "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANagwKZPn9RKqIX9Vr3QrqFRZUotFl06nx0I9NTiiFLcrp2zchtHiQ/dUq4IiSCuKQn+7vCKUZqUbT3lCks4YlsCAwEAAQ==",
+        "keyAlgorithm": "rsa",
+        "attributes": {
+          "country": "SE",
+          "region": "Norrbotten",
+          "locality": "Lulea",
+          "organization": "LTU",
+          "unit": "EISLAB"
+        }
+      }
+    },
+    {
+      "host": "localhost",
+      "port": 8083,
+      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALgncwlPh9z4ayEtw0o59QNfe6UPvYTZ\nFfHyRZkPe4sL3WGu3/vvKJs5jdeLPDN6JYI5sJmzs+RyvNda6Gde16kCAwEAAQ==\n-----END PUBLIC KEY-----",
+      "user": {
+        "name": "Bob",
+        "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALgncwlPh9z4ayEtw0o59QNfe6UPvYTZFfHyRZkPe4sL3WGu3/vvKJs5jdeLPDN6JYI5sJmzs+RyvNda6Gde16kCAwEAAQ==",
+        "keyAlgorithm":"rsa",
+        "attributes": {
+          "country": "HU",
+          "region": "Budapest",
+          "locality": "Muegyetem rkp. 3",
+          "organization": "BME",
+          "unit": "TMIT"
+        }
+      }
+    }
+  ],
+  "tokenTemplates": []
+}

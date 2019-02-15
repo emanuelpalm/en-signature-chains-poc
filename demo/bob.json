@@ -1,0 +1,148 @@
+{
+  "server": {
+    "port": 8082
+  },
+  "peer": {
+    "port": 8083
+  },
+  "me": {
+    "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALgncwlPh9z4ayEtw0o59QNfe6UPvYTZ\nFfHyRZkPe4sL3WGu3/vvKJs5jdeLPDN6JYI5sJmzs+RyvNda6Gde16kCAwEAAQ==\n-----END PUBLIC KEY-----",
+    "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIBOwIBAAJBALgncwlPh9z4ayEtw0o59QNfe6UPvYTZFfHyRZkPe4sL3WGu3/vv\nKJs5jdeLPDN6JYI5sJmzs+RyvNda6Gde16kCAwEAAQJBAJFBnL2lW/dyg54iKL6t\nxJOqhy8FoWneii7T+Q3oZnyfwjl2uKw5e8mbzsu/VpvsjVHPcyPWfkW78/w6XwRl\nDhkCIQDkyw1MikYCVylo2qwhBEGXIV7WTarwqMkRLh/FDHUbXwIhAM4NfVhHtGuw\nyTySi/ToTy6AaBhfJEbP+IBZGjMeg/H3AiAoB0Z6X67D9g/uomN/G0mGcXYwNEJ1\n/HHBKbqxNO7ALQIhAJ6GGkz0vYWseOW1CR/eKizodS1q5QnlrpVv94wkifZ5AiAP\niNtnJCdwXRP80PYK8SboqYSYSg0lE6x1wGUIa7I+4A==\n-----END RSA PRIVATE KEY-----",
+    "user": {
+      "name": "Bob",
+      "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALgncwlPh9z4ayEtw0o59QNfe6UPvYTZFfHyRZkPe4sL3WGu3/vvKJs5jdeLPDN6JYI5sJmzs+RyvNda6Gde16kCAwEAAQ==",
+      "keyAlgorithm":"rsa",
+      "attributes": {
+        "country": "HU",
+        "region": "Budapest",
+        "locality": "Muegyetem rkp. 3",
+        "organization": "BME",
+        "unit": "TMIT"
+      }
+    }
+  },
+  "peers": [
+    {
+      "host": "localhost",
+      "port": 8081,
+      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANagwKZPn9RKqIX9Vr3QrqFRZUotFl06\nnx0I9NTiiFLcrp2zchtHiQ/dUq4IiSCuKQn+7vCKUZqUbT3lCks4YlsCAwEAAQ==\n-----END PUBLIC KEY-----",
+      "user": {
+        "name": "Alice",
+        "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANagwKZPn9RKqIX9Vr3QrqFRZUotFl06nx0I9NTiiFLcrp2zchtHiQ/dUq4IiSCuKQn+7vCKUZqUbT3lCks4YlsCAwEAAQ==",
+        "keyAlgorithm": "rsa",
+        "attributes": {
+          "country": "SE",
+          "region": "Norrbotten",
+          "locality": "Lulea",
+          "organization": "LTU",
+          "unit": "EISLAB"
+        }
+      }
+    },
+    {
+      "host": "localhost",
+      "port": 8085,
+      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANb1RMiYKjsaJlzXw35qJg5PWDPAUS3c\nQD8yZTcw6SMwy4o01NKGXtjxtWkjFB1Wug9Nki/zL0g0FPc9wNsBoCECAwEAAQ==\n-----END PUBLIC KEY-----",
+      "user": {
+        "name": "Charles",
+        "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANb1RMiYKjsaJlzXw35qJg5PWDPAUS3cQD8yZTcw6SMwy4o01NKGXtjxtWkjFB1Wug9Nki/zL0g0FPc9wNsBoCECAwEAAQ==",
+        "keyAlgorithm":"rsa",
+        "attributes": {
+          "country": "ES",
+          "region": "Biscay",
+          "locality": "Bilbao",
+          "organization": "Mondragen University"
+        }
+      }
+    }
+  ],
+  "tokenTemplates": [
+    {
+      "type": "SEK",
+      "data": {
+        "amount": {
+          "default": "500",
+          "options": ["50", "100", "250", "500", "1000", "5000", "10000", "50000"]
+        },
+        "issuer-bic": {
+          "default": "ESSESESS",
+          "options": ["ESSESESS"]
+        }
+      },
+      "isQualifiable": false
+    },
+    {
+      "idPrefix": "OLS-",
+      "type": "delivery",
+      "data": {
+        "transport": {
+          "referenceToKind": "transport"
+        }
+      },
+      "isQualifiable": true
+    },
+    {
+      "idPrefix": "OLS-",
+      "type": "transport",
+      "data": {
+        "priority": {
+          "default": "C",
+          "options": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "units": {
+          "default": "300",
+          "options": [
+            "100",
+            "200",
+            "300",
+            "400",
+            "500"
+          ]
+        },
+        "from": {
+          "default": "Skövde",
+          "options": [
+            "Arvika",
+            "Bangkok",
+            "Blainville",
+            "Braås",
+            "Brisbane",
+            "Curitiba",
+            "Durban",
+            "Gent",
+            "Hosakote",
+            "Kaluga",
+            "New River Valley",
+            "Skövde",
+            "Tuve",
+            "Umeå"
+          ]
+        },
+        "to": {
+          "default": "Blainville",
+          "options": [
+            "Arvika",
+            "Bangkok",
+            "Blainville",
+            "Braås",
+            "Brisbane",
+            "Curitiba",
+            "Durban",
+            "Gent",
+            "Hosakote",
+            "Kaluga",
+            "New River Valley",
+            "Skövde",
+            "Tuve",
+            "Umeå"
+          ]
+        }
+      },
+      "isQualifiable": true
+    }
+  ]
+}

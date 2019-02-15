@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "target/@types",
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "module": "commonjs",
+    "outDir": "target",
+    "typeRoots": [
+      "node_modules/@types",
+      "@types"
+    ],
+    "target": "es2015",
+    "sourceMap": false,
+    "strict": true
+  },
+  "exclude": [
+    "node_modules",
+    "target"
+  ]
+}

@@ -1,0 +1,8 @@
+<svg width="48" height="48" version="1.1" viewBox="0 0 12.7 12.7" xmlns="http://www.w3.org/2000/svg">
+<path transform="scale(.2646)" d="m24 3.998c-11.03 0-20 8.973-20 20.01s8.966 20 20 20 20.01-8.966 20.01-20-8.973-20.01-20.01-20.01zm0 2c9.951 0 18.01 8.051 18.01 18.01 0 9.955-8.051 18-18.01 18-9.951 0-18-8.043-18-18 0-9.955 8.043-18.01 18-18.01z" color="#000000" color-rendering="auto" dominant-baseline="auto" fill="#949494" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stroke-width="3.78" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;isolation:auto;mix-blend-mode:normal;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+<g transform="matrix(1.079 0 0 1.079 -.1859 -.3745)" fill-rule="evenodd" stroke-width=".859">
+<path d="m6.546 4.498-0.3969 0.6873 1.436 2.488h-4.705l0.4584 0.7938h5.499z" fill="#5a5a5a"/>
+<path d="m6.485 3.017-2.291 3.969h0.9167l1.436-2.488 2.291 3.969 0.3969-0.6873z" fill="#949494"/>
+<path d="m5.569 3.017-2.688 4.656 4.705 1e-7 -0.3969-0.6873h-2.995l2.291-3.969z" fill="#bebebe"/>
+</g>
+</svg>
