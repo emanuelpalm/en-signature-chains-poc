@@ -5,8 +5,8 @@ import {isTokenTemplate, isUser, TokenTemplate, User} from "../model";
  *
  * Note that this application is currently designed only to support some
  * particular kinds of demonstrations. Much of the information provided via a
- * file of this kind would be provided through other Arrowhead systems in a
- * production scenario.
+ * file of this kind would be provided through other systems in a production
+ * scenario.
  */
 export interface Options {
     /**
@@ -29,10 +29,10 @@ export interface Options {
      * The identity used to represent the application instance.
      */
     me: {
-        /// X.509 public key (Base64).
+        /// X.509 public key (PEM format).
         publicKey: string;
 
-        /// X.509 private key (Base64).
+        /// X.509 private key (PEM format).
         privateKey: string;
 
         /// User profile.
@@ -44,8 +44,8 @@ export interface Options {
      * addresses and ports through which they are available.
      *
      * These make up a naive version of the User Registry presented in the
-     * paper "The Exchange Network: A Function Architecture for Digital
-     * Negotiation and Ownership Exchange".
+     * paper "The Exchange Network: A General-Purpose Architecture for Digital
+     * Negotiation and Exchange".
      */
     peers: {
         host: string;
@@ -55,17 +55,12 @@ export interface Options {
     }[];
 
     /**
-     * Tokens this particular application instance assumes itself to have ready
-     * access to, even if no known exchanges exist where the instance becomes
-     * their owner.
-     *
-     * Essentially, these tokens are created out of nothing, and in a real-world
-     * scenario, a legal contract would have to exists stating the implications
-     * of the tokens and giving the instance the right to create them.
+     * Describes the tokens that can be created by this particular application
+     * instance.
      *
      * These make up a naive version of the Definition Bank presented in the
-     * paper "The Exchange Network: A Function Architecture for Digital
-     * Negotiation and Ownership Exchange".
+     * paper "The Exchange Network: A General-Purpose Architecture for Digital
+     * Negotiation and Exchange".
      */
     tokenTemplates: TokenTemplate[];
 }
