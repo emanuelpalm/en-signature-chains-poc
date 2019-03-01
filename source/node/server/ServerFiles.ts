@@ -29,7 +29,7 @@ export class ServerFiles extends Observable<ServerFilesObserver> {
                 }
             }
             else if (stat.isFile()) {
-                const name = "/" + _path.relative(path, p);
+                const name = "/" + _path.relative(path, p).replace("\\", "/");
                 this.assets.set(name, fs.readFileSync(p));
             }
         };
