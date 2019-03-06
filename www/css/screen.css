@@ -10,7 +10,7 @@ body.modal section {
 }
 
 a, button, div, h1, h2, h3, h4, h5, h6, input, p, td, th {
-    font-family: "sans-serif";
+    font-family: "sans-serif", arial;
 }
 
 a, button, div, input, p, td, th {
@@ -342,7 +342,7 @@ nav > button.selected {
 
 .en-log > .body > .en-card > .entries > .label {
     color: #5a5a5a;
-    font-family: monospace;
+    font-family: consolas, monospace;
     font-size: 12px;
     text-align: right;
 }
@@ -359,7 +359,7 @@ nav > button.selected {
 
 .en-log > .body > .en-card > .entries > .value,
 .en-log > .body > .en-card > .entries > .value > * {
-    font-family: monospace;
+    font-family: consolas, monospace;
     font-size: 12px;
 }
 
@@ -378,7 +378,7 @@ nav > button.selected {
 .en-id,
 .en-origin {
     color: #5a5a5a;
-    font-family: monospace;
+    font-family: consolas, monospace;
     font-style: italic;
     font-weight: bold;
     overflow: hidden !important;

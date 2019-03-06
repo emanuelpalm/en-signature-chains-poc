@@ -12,13 +12,16 @@ onInterrupt() {
     done
 }
 
-npm start demo/alice.json &
+npm start demo/component-supplier.json &
 PIDS+=`echo $!`
 
-npm start demo/bob.json &
+npm start demo/final-assembly-plant.json &
 PIDS+=`echo $!`
 
-npm start demo/charles.json &
+npm start demo/carrier.json &
+PIDS+=`echo $!`
+
+npm start demo/cross-dock.json &
 PIDS+=`echo $!`
 
 cat # Wait for interrupt
