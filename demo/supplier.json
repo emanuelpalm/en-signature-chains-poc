@@ -1,0 +1,127 @@
+{
+  "server": {
+    "port": 8086
+  },
+  "peer": {
+    "port": 8087
+  },
+  "me": {
+    "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALUEFjB8Z0L8R63P2w9H4pWDa362a1Qy\ncQtXDhWq6FuRlpPXtoOifzJZMqP0Pymn40uL0WADbQVd4FRhuwVBWT0CAwEAAQ==\n-----END PUBLIC KEY-----",
+    "privateKey": "-----BEGIN PRIVATE KEY-----\nMIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAtQQWMHxnQvxHrc/b\nD0filYNrfrZrVDJxC1cOFaroW5GWk9e2g6J/Mlkyo/Q/KafjS4vRYANtBV3gVGG7\nBUFZPQIDAQABAkAVxToN9shMjB7qzpbgDZs4tCeXg8UAyVhDLuMow/dSG8qSgxo8\nb3g3eCFrm8+OuMtCV5b3wjQ7zlUc3PCtg7+BAiEA4iGabjpCNPJqoBlSs7hpByax\n4Pq8NagwK203khMoXJECIQDM7PSzKGMP4wfP73iVTHfDjYlIkKHVRuEn+E/Zvzi3\n7QIhAK/JM4WwoDsMn7qpNNMk7fBzMiAUii6j+h4oHuTdI6khAiASeG0Z1NMQ9IKY\nwFnbAxhsXM555udfRNM4eg4gbzbahQIgQdT/Xk+r9TVMRjgZgdJyT+yRF3dTHgej\nCBo9qDPtv4s=\n-----END PRIVATE KEY-----",
+    "user": {
+      "name": "Supplier",
+      "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALUEFjB8Z0L8R63P2w9H4pWDa362a1QycQtXDhWq6FuRlpPXtoOifzJZMqP0Pymn40uL0WADbQVd4FRhuwVBWT0CAwEAAQ==",
+      "keyAlgorithm": "rsa",
+      "attributes": {
+        "country": "FR",
+        "region": "Normandy",
+        "locality": "Bessin",
+        "organization": "Supplier SARL",
+        "unit": "Large Component Manufacturing"
+      }
+    }
+  },
+  "peers": [
+    {
+      "host": "localhost",
+      "port": 8081,
+      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANyYh98NfMxXxSwQnyxVcHKDvXEQFFvs\nkEeZYop+xsxDlkE9Vh5GmvyS+7U0oDF1fGUbVdkDpgIZaDE79niOx8MCAwEAAQ==\n-----END PUBLIC KEY-----",
+      "user": {
+        "name": "Final Assembly Plant",
+        "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANyYh98NfMxXxSwQnyxVcHKDvXEQFFvskEeZYop+xsxDlkE9Vh5GmvyS+7U0oDF1fGUbVdkDpgIZaDE79niOx8MCAwEAAQ==",
+        "keyAlgorithm":"rsa",
+        "attributes": {
+          "country": "SE",
+          "region": "Västra Götaland",
+          "locality": "Göteborg",
+          "organization": "Volvo Trucks"
+        }
+      }
+    },
+    {
+      "host": "localhost",
+      "port": 8083,
+      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANxMGHZkEWZJGEnlstbLzzZke9gTzscw\n7pi81Qm6qxxtbg/WfTjNCJD5BkEnlO6Ii0+6pF6ofs+pse6qiFOS9usCAwEAAQ==\n-----END PUBLIC KEY-----",
+      "user": {
+        "name": "Carrier",
+        "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANxMGHZkEWZJGEnlstbLzzZke9gTzscw7pi81Qm6qxxtbg/WfTjNCJD5BkEnlO6Ii0+6pF6ofs+pse6qiFOS9usCAwEAAQ",
+        "keyAlgorithm":"rsa",
+        "attributes": {
+          "country": "SE",
+          "region": "Skåne",
+          "locality": "Malmö",
+          "organization": "Carrier AB",
+          "unit": "Trucking"
+        }
+      }
+    },
+    {
+      "host": "localhost",
+      "port": 8085,
+      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAK/L0valDPbOn1cpGRsnKwPL+RX+u8XW\nkIeaKaWFqBbuJSNUossy6fZfFK+MUbTPP1PVOhrREFZB7igh3405HUcCAwEAAQ==\n-----END PUBLIC KEY-----",
+      "user": {
+        "name": "Cross-Dock",
+        "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAK/L0valDPbOn1cpGRsnKwPL+RX+u8XWkIeaKaWFqBbuJSNUossy6fZfFK+MUbTPP1PVOhrREFZB7igh3405HUcCAwEAAQ==",
+        "keyAlgorithm":"rsa",
+        "attributes": {
+          "country": "SE",
+          "region": "Skåne",
+          "locality": "Malmö",
+          "organization": "Carrier AB"
+        }
+      }
+    }
+  ],
+  "tokenTemplates": [
+    {
+      "type": "component-order",
+      "data": {
+        "Type": {
+          "default": "X",
+          "options": ["X"]
+        },
+        "Units": {
+          "default": "200",
+          "options": ["100", "200", "300"]
+        },
+        "Time of Delivery": {
+          "default": "2019-03-20 11:30:00",
+          "options": ["2019-03-20 11:30:00", "2019-03-21 16:15:00", "2019-03-22 09:45:00"]
+        }
+      },
+      "isQualifiable": true
+    },
+    {
+      "type": "component-transport",
+      "data": {
+        "Type": {
+          "default": "X",
+          "options": ["X"]
+        },
+        "Units": {
+          "default": "200",
+          "options": ["100", "200", "300"]
+        },
+        "Time of Pickup": {
+          "default": "2019-03-18 07:30:00",
+          "options": ["2019-03-18 07:30:00", "2019-03-19 07:30:00", "2019-03-19 18:00:00"]
+        },
+        "Time of Delivery": {
+          "default": "2019-03-20 11:30:00",
+          "options": ["2019-03-20 11:30:00", "2019-03-21 16:15:00", "2019-03-22 09:45:00"]
+        }
+      },
+      "isQualifiable": false
+    },
+    {
+      "type": "SEK",
+      "data": {
+        "Amount": {
+          "default": "7800 x 200",
+          "options": ["7800 x 100", "7800 x 200", "7800 x 300", "100 000 x 100", "100 000 x 200", "100 000 x 300"]
+        }
+      },
+      "isQualifiable": true
+    }
+  ]
+}

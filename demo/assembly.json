@@ -1,40 +1,40 @@
 {
   "server": {
-    "port": 8082
+    "port": 8080
   },
   "peer": {
-    "port": 8083
+    "port": 8081
   },
   "me": {
-    "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANxMGHZkEWZJGEnlstbLzzZke9gTzscw\n7pi81Qm6qxxtbg/WfTjNCJD5BkEnlO6Ii0+6pF6ofs+pse6qiFOS9usCAwEAAQ==\n-----END PUBLIC KEY-----",
-    "privateKey": "-----BEGIN PRIVATE KEY-----\nMIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEA3EwYdmQRZkkYSeWy\n1svPNmR72BPOxzDumLzVCbqrHG1uD9Z9OM0IkPkGQSeU7oiLT7qkXqh+z6mx7qqI\nU5L26wIDAQABAkEAsvf3H6doI0raup4rTilBbBTyL7bX1CdCjz9Ja6AFBw+18Ehu\n13+FzkVb5WuWkWYnSCgsRCelnrmlC+cJ9pM/UQIhAO4VkWiF0zJuegnmvHv/6o+5\nuZoOTK/Y4Rb50IWpXoltAiEA7N/hZpfic9r984CWreVkNp61p55Wx7YdzHbWRS8P\nYrcCIQCbEhU5nSCoUmjOlijiIxfmMTQAcZvlVT+WtXPp+x0GKQIgdni6+V75ycw7\nu3AS7MKQTqkuXblZ2eUCHmNJY6zX2x0CIDR6qyXTDtlcQ7GsePI3mhda7MQBBibU\n77liTWeiJySv\n-----END PRIVATE KEY-----",
+    "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANyYh98NfMxXxSwQnyxVcHKDvXEQFFvs\nkEeZYop+xsxDlkE9Vh5GmvyS+7U0oDF1fGUbVdkDpgIZaDE79niOx8MCAwEAAQ==\n-----END PUBLIC KEY-----",
+    "privateKey": "-----BEGIN PRIVATE KEY-----\nMIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEA3JiH3w18zFfFLBCf\nLFVwcoO9cRAUW+yQR5liin7GzEOWQT1WHkaa/JL7tTSgMXV8ZRtV2QOmAhloMTv2\neI7HwwIDAQABAkAhX6Y2tbiqxaCb8QvTzj1L5eh0QYWC/sA5RNhmsZVr84nLL0bt\nL0Ovx26yPmM2cuGbdyI+FSQZIsxl8RcxGrLxAiEA88DcQPOoalEM9IK8DdyW+Pn9\nMn96VicGKv1AKYPEwKsCIQDnrdHVWsrInc9yR2HxJRMvAXIB2ze3vwMWjtsBphGF\nSQIhALBVSoCqQ6F1tLuFf+k/NPA0WJiZY7TDUlDzF+Fwc3s1AiAkeoLylBQf2HFE\nbibmwE6v9QtNbYXtYZ8L2zxymwJhOQIgHdShqR9NOmMIiq5WHz2qE/zzBZC/TR60\nNhOP1Sgiq3o=\n-----END PRIVATE KEY-----",
     "user": {
-      "name": "Carrier",
-      "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANxMGHZkEWZJGEnlstbLzzZke9gTzscw7pi81Qm6qxxtbg/WfTjNCJD5BkEnlO6Ii0+6pF6ofs+pse6qiFOS9usCAwEAAQ",
+      "name": "Final Assembly Plant",
+      "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANyYh98NfMxXxSwQnyxVcHKDvXEQFFvskEeZYop+xsxDlkE9Vh5GmvyS+7U0oDF1fGUbVdkDpgIZaDE79niOx8MCAwEAAQ==",
       "keyAlgorithm":"rsa",
       "attributes": {
         "country": "SE",
-        "region": "Skåne",
-        "locality": "Malmö",
-        "organization": "Carrier AB",
-        "unit": "Trucking"
+        "region": "Västra Götaland",
+        "locality": "Göteborg",
+        "organization": "Volvo Trucks"
       }
     }
   },
   "peers": [
     {
       "host": "localhost",
-      "port": 8081,
-      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANyYh98NfMxXxSwQnyxVcHKDvXEQFFvs\nkEeZYop+xsxDlkE9Vh5GmvyS+7U0oDF1fGUbVdkDpgIZaDE79niOx8MCAwEAAQ==\n-----END PUBLIC KEY-----",
+      "port": 8083,
+      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANxMGHZkEWZJGEnlstbLzzZke9gTzscw\n7pi81Qm6qxxtbg/WfTjNCJD5BkEnlO6Ii0+6pF6ofs+pse6qiFOS9usCAwEAAQ==\n-----END PUBLIC KEY-----",
       "user": {
-        "name": "Final Assembly Plant",
-        "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANyYh98NfMxXxSwQnyxVcHKDvXEQFFvskEeZYop+xsxDlkE9Vh5GmvyS+7U0oDF1fGUbVdkDpgIZaDE79niOx8MCAwEAAQ==",
+        "name": "Carrier",
+        "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANxMGHZkEWZJGEnlstbLzzZke9gTzscw7pi81Qm6qxxtbg/WfTjNCJD5BkEnlO6Ii0+6pF6ofs+pse6qiFOS9usCAwEAAQ",
         "keyAlgorithm":"rsa",
         "attributes": {
           "country": "SE",
-          "region": "Västra Götaland",
-          "locality": "Göteborg",
-          "organization": "Volvo Trucks"
+          "region": "Skåne",
+          "locality": "Malmö",
+          "organization": "Carrier AB",
+          "unit": "Trucking"
         }
       }
     },
@@ -74,7 +74,7 @@
   ],
   "tokenTemplates": [
     {
-      "type": "component-transport",
+      "type": "component-order",
       "data": {
         "Type": {
           "default": "X",
@@ -83,31 +83,23 @@
         "Units": {
           "default": "200",
           "options": ["100", "200", "300"]
-        },
-        "Time of Pickup": {
-          "default": "2019-03-18 07:30:00",
-          "options": ["2019-03-18 07:30:00", "2019-03-19 07:30:00", "2019-03-19 18:00:00"]
         },
         "Time of Delivery": {
           "default": "2019-03-20 11:30:00",
           "options": ["2019-03-20 11:30:00", "2019-03-21 16:15:00", "2019-03-22 09:45:00"]
         }
       },
-      "isQualifiable": true
+      "isQualifiable": false
     },
     {
-      "type": "component-sequencing",
+      "type": "SEK",
       "data": {
-        "Type": {
-          "default": "X",
-          "options": ["X"]
-        },
-        "Units": {
-          "default": "200",
-          "options": ["100", "200", "300"]
+        "Amount": {
+          "default": "100 000 x 200",
+          "options": ["100 000 x 100", "100 000 x 200", "100 000 x 300"]
         }
       },
-      "isQualifiable": false
+      "isQualifiable": true
     }
   ]
 }
