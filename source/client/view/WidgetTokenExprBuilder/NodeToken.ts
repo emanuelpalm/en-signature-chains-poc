@@ -17,10 +17,10 @@ export class NodeToken extends Widget implements Node<xnet.Token> {
     {
         super("token");
         this.isQualified = xnet.isTokenQualified(token);
-        this.isQualifiable = context.owner !== undefined && !this.isQualified && (
-            context.model.tokens().isQualifiable(context.owner, token) ||
-            context.model.tokenTemplates().isQualifiable(token)
-        );
+        this.isQualifiable = !this.isQualified
+            && (context.model.tokenTemplates().isQualifiable(token)
+                || (context.owner !== undefined
+                    && context.model.tokens().isQualifiable(context.owner, token)));
     }
 
     public tokenize(): xnet.Token {
@@ -78,7 +78,7 @@ export class NodeToken extends Widget implements Node<xnet.Token> {
                             const references = this.context.model.tokens()
                                 .getByType(field.referenceToType, 100)
                                 .filter(token => token.id !== undefined)
-                                .map(token => `${token.type} (${token.id})`) as string[];
+                                .map(token => `${token.type} {#${token.id}}`) as string[];
                             if (references.length === 0) {
                                 references.push("");
                             }

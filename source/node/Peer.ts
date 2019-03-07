@@ -6,6 +6,7 @@ import * as parser from "body-reader";
 import * as router from "find-my-way";
 
 const HASH_ALGORITHM = "SHA1";
+const FIND_TOKEN_ID = /{#([^}\s]{8,})}/;
 
 export class Peer {
     private readonly router: router.Instance<router.HTTPVersion.V1>;
@@ -146,15 +147,16 @@ export class Peer {
                     res.end();
                     return;
                 }
-                this.model.exchanges().splice(0, 0, data);
-                const proposal = data.acceptance.proposal;
-                const tokens = this.model.tokens();
-                xnet.getTokensFrom(proposal.wants).forEach(token => {
-                    tokens.register(proposer, token);
-                });
-                xnet.getTokensFrom(proposal.gives).forEach(token => {
-                    tokens.register(acceptor, token);
-                });
+                if (this.model.exchanges().update(data)) {
+                    const proposal = data.acceptance.proposal;
+                    const tokens = this.model.tokens();
+                    xnet.getTokensFrom(proposal.wants).forEach(token => {
+                        tokens.register(proposer, token);
+                    });
+                    xnet.getTokensFrom(proposal.gives).forEach(token => {
+                        tokens.register(acceptor, token);
+                    });
+                }
             },
             error => {
                 model.log().push({
@@ -181,68 +183,86 @@ export class Peer {
         const onError = (description: string) => {
             this.logError("Proposal Error", {description, proposal}, proposal);
         };
-        const f = async () => {
-            try {
-                if (proposal.receiver === undefined) {
-                    return onError("Proposal receiver not set.");
-                }
-                if (proposal.proposer === undefined) {
-                    return onError("Proposal sender not set.");
-                }
-                if (!xnet.isProposalSatisfiable(proposal)) {
-                    return onError("Proposal not satisfiable.");
-                }
-
-                const [host, port] = this.getHostAndPortByReceiverKey(proposal.receiver.key);
-
-                if (proposal.appendages !== undefined) {
-                    await Promise.all(proposal.appendages.map(a => {
-                        return this.sendExchangeTo(a, host, port);
-                    }));
-                }
-
-                this.model.proposals().updateProposal(proposal, ProposalStatus.Sent);
-                const proposal0 = this.signProposal({
-                    proposer: proposal.proposer.key,
-                    wants: proposal.wants,
-                    gives: proposal.gives,
-                    definition: undefined,
-                    predecessor: Any.mapIfNotEmpty(this.model.exchanges()
-                            .getPredecessorFor(proposal.receiver, proposal.proposer),
-                        exchange => exchange.hash
-                    ),
-                });
-
-                const payload = JSON.stringify(proposal0);
-                const request = http.request({
-                    host,
-                    method: "POST",
-                    path: "/proposals",
-                    port,
-                    headers: {
-                        "Content-Length": Buffer.byteLength(payload),
-                        "Content-Type": "application/json",
-                    },
-                });
-                request.on("error", error => {
-                    this.logError("Proposal Error", error, proposal);
-                });
-                request.on("response", (response: http.IncomingMessage) => {
-                    const status = response.statusCode || 0;
-                    if (status < 200 || status > 299) {
-                        this.logError("Proposal Error", {
-                            status: response.statusCode + " " + response.statusMessage,
-                            headers: response.rawHeaders,
-                        }, proposal);
-                    }
-                });
-                request.end(payload);
+        try {
+            if (proposal.receiver === undefined) {
+                return onError("Proposal receiver not set.");
             }
-            catch (error) {
+            if (proposal.proposer === undefined) {
+                return onError("Proposal sender not set.");
+            }
+            if (!xnet.isProposalSatisfiable(proposal)) {
+                return onError("Proposal not satisfiable.");
+            }
+
+            const [host, port] = this.getHostAndPortByReceiverKey(proposal.receiver.key);
+
+            if (proposal.appendages === undefined) {
+                proposal.appendages = xnet.getTokensFrom(proposal.wants)
+                    .concat(xnet.getTokensFrom(proposal.gives))
+                    .reduce((acc, token) => acc.concat(
+                        Object.getOwnPropertyNames(token.data).reduce((acc0, key) => {
+                            const value = token.data[key];
+                            if (typeof value === "string") {
+                                const tokenIDs = value.match(FIND_TOKEN_ID);
+                                if (tokenIDs !== null) {
+                                    for (const tokenID of tokenIDs) {
+                                        acc0.push(tokenID.substring(2, tokenID.length - 1));
+                                    }
+                                }
+                            }
+                            return acc0;
+                        }, new Array<string>())), new Array<string>())
+                    .reduce((acc, tokenID) => {
+                        return acc.concat(...this.model.exchanges().getByTokenID(tokenID));
+                    }, new Array<xnet.Exchange>());
+            }
+            if (proposal.appendages !== undefined) {
+                for (const exchange of proposal.appendages) {
+                    this.sendExchangeTo(exchange, host, port)
+                        .catch(error => this.logError("Send Exchange Error", error));
+                }
+            }
+
+            this.model.proposals().updateProposal(proposal, ProposalStatus.Sent);
+            const proposal0 = this.signProposal({
+                proposer: proposal.proposer.key,
+                wants: proposal.wants,
+                gives: proposal.gives,
+                definition: undefined,
+                predecessor: Any.mapIfNotEmpty(this.model.exchanges()
+                        .getPredecessorFor(proposal.receiver, proposal.proposer),
+                    exchange => exchange.hash
+                ),
+            });
+
+            const payload = JSON.stringify(proposal0);
+            const request = http.request({
+                host,
+                method: "POST",
+                path: "/proposals",
+                port,
+                headers: {
+                    "Content-Length": Buffer.byteLength(payload),
+                    "Content-Type": "application/json",
+                },
+            });
+            request.on("error", error => {
                 this.logError("Proposal Error", error, proposal);
-            }
-        };
-        f();
+            });
+            request.on("response", (response: http.IncomingMessage) => {
+                const status = response.statusCode || 0;
+                if (status < 200 || status > 299) {
+                    this.logError("Proposal Error", {
+                        status: response.statusCode + " " + response.statusMessage,
+                        headers: response.rawHeaders,
+                    }, proposal);
+                }
+            });
+            request.end(payload);
+        }
+        catch (error) {
+            this.logError("Proposal Error", error, proposal);
+        }
     }
 
     public accept(proposal: Proposal) {

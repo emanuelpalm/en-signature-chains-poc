@@ -84,8 +84,12 @@
           "options": ["SEK"]
         },
         "Amount": {
-          "default": "100 000 x 200",
-          "options": ["100 000 x 100", "100 000 x 200", "100 000 x 300"]
+          "default": "100 000",
+          "options": ["80 000", "100 000", "120 000"]
+        },
+        "Multiplier": {
+          "default": "200",
+          "options": ["100", "200", "300"]
         }
       },
       "isCreatable": true,
@@ -109,7 +113,7 @@
         }
       },
       "isCreatable": false,
-      "isQualifiable": false
+      "isQualifiable": true
     },
 
     {
@@ -120,7 +124,7 @@
         }
       },
       "isCreatable": false,
-      "isQualifiable": false
+      "isQualifiable": true
     },
 
     {
@@ -134,7 +138,7 @@
         }
       },
       "isCreatable": false,
-      "isQualifiable": false
+      "isQualifiable": true
     }
   ]
 }

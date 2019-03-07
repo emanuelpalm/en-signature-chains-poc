@@ -287,6 +287,35 @@ export namespace xnet {
     }
 
     /**
+     * Determines if given `expr` contains a token with given `id`.
+     *
+     * @param expr Checked expression.
+     * @param id Token ID searched for.
+     * @return Whether any token in `expr` has ID `id`.
+     */
+    export function isExpressionContainingTokenID(expr: Expression, id: string): boolean {
+        return inner(expr);
+
+        function inner(expr: Expression): boolean {
+            if (expr === null) {
+                return false;
+            }
+            if (isExpressionToken(expr)) {
+                return expr.id === id;
+            }
+            if (isExpressionAnd(expr) || isExpressionOr(expr)) {
+                for (const item of expr.items) {
+                    if (!inner(item)) {
+                        return false;
+                    }
+                }
+                return false;
+            }
+            return inner(expr.item);
+        }
+    }
+
+    /**
      * Checks whether given `expr` represent a single `Token`.
      *
      * @param expr Checked `Expression`.
@@ -630,6 +659,18 @@ export namespace xnet {
             && ((<Proposal>any).predecessor === undefined
                 || isHash((<Proposal>any).predecessor))
             && isSignature((<Proposal>any).signature);
+    }
+
+    /**
+     * Determines if given `proposal` contains a token with given `id`.
+     *
+     * @param proposal Checked proposal.
+     * @param id Token ID searched for.
+     * @return Whether any token in `expr` has ID `id`.
+     */
+    export function isProposalContainingTokenID(proposal: WantsGives, id: string): boolean {
+        return isExpressionContainingTokenID(proposal.wants, id)
+            || isExpressionContainingTokenID(proposal.gives, id);
     }
 
     /**

@@ -1,6 +1,6 @@
 import {Data} from "./Data";
 import {ListArray} from "../../util";
-import {User, xnet} from "../../model";
+import {Any, User, xnet} from "../../model";
 
 export class DataExchanges
     extends ListArray<xnet.Exchange>
@@ -28,5 +28,25 @@ export class DataExchanges
                 && (x === a.key || x === b.key)
                 && (y === a.key || y === b.key);
         }
+    }
+
+    public getByTokenID(tokenID: string): xnet.Exchange[] {
+        const result: xnet.Exchange[] = [];
+        for (const item of this.items()) {
+            if (xnet.isProposalContainingTokenID(item.acceptance.proposal, tokenID)) {
+                result.push(item);
+            }
+        }
+        return result;
+    }
+
+    public update(exchange: xnet.Exchange): boolean {
+        for (const item of this.items()) {
+            if (Any.deepEqual(item.hash, exchange.hash)) {
+                return false;
+            }
+        }
+        this.splice(0, 0, exchange);
+        return true;
     }
 }

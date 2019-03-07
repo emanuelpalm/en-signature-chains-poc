@@ -83,9 +83,17 @@
     {
       "type": "XTT: Tentative Payment",
       "data": {
+        "Currency": {
+          "default": "SEK",
+          "options": ["SEK"]
+        },
         "Amount": {
-          "default": "7800 x 200",
-          "options": ["7800 x 100", "7800 x 200", "7800 x 300"]
+          "default": "7800",
+          "options": ["7200", "7800", "12600"]
+        },
+        "Multiplier": {
+          "default": "200",
+          "options": ["100", "200", "300"]
         }
       },
       "isCreatable": false,
@@ -109,7 +117,7 @@
         }
       },
       "isCreatable": true,
-      "isQualifiable": true
+      "isQualifiable": false
     },
 
     {
@@ -120,7 +128,7 @@
         }
       },
       "isCreatable": true,
-      "isQualifiable": true
+      "isQualifiable": false
     },
 
     {
@@ -130,11 +138,11 @@
           "referenceToType": "XTT: Tentative Payment"
         },
         "Transport": {
-          "referenceToType": "XTO: Transport Confirmation"
+          "referenceToType": "XTO: Transport Completion"
         }
       },
       "isCreatable": true,
-      "isQualifiable": true
+      "isQualifiable": false
     }
   ]
 }
