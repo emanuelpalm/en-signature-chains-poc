@@ -55,6 +55,12 @@ export interface Proposal {
      * The status of the proposal, determined by user actions, etc.
      */
     status?: ProposalStatus,
+
+    /**
+     * Exchanges the proposal receiver is to be informed about when the proposal
+     * is sent.
+     */
+    appendages?: xnet.Exchange[],
 }
 
 export enum ProposalStatus {
@@ -73,11 +79,15 @@ export enum ProposalStatus {
  */
 export function isProposal(any: any): any is Proposal {
     return typeof any === "object" && any !== null
-        && (any.proposer === undefined || isUser(any.proposer))
-        && (any.receiver === undefined || isUser(any.receiver))
-        && xnet.isExpression(any.wants)
-        && xnet.isExpression(any.gives)
-        && (any.definition === undefined || xnet.isHash(any.definition))
-        && (any.predecessor === undefined || xnet.isHash(any.predecessor))
-        && (any.signature === undefined || xnet.isSignature(any.signature));
+        && ((<Proposal>any).proposer === undefined || isUser((<Proposal>any).proposer))
+        && ((<Proposal>any).receiver === undefined || isUser((<Proposal>any).receiver))
+        && xnet.isExpression((<Proposal>any).wants)
+        && xnet.isExpression((<Proposal>any).gives)
+        && ((<Proposal>any).definition === undefined || xnet.isHash((<Proposal>any).definition))
+        && ((<Proposal>any).predecessor === undefined || xnet.isHash((<Proposal>any).predecessor))
+        && ((<Proposal>any).signature === undefined || xnet.isSignature((<Proposal>any).signature))
+        && ((<Proposal>any).appendages === undefined
+            || (Array.isArray((<Proposal>any).appendages)
+                && ((<Proposal>any).appendages as xnet.Exchange[])
+                    .findIndex(item => !xnet.isExchange(item)) === -1));
 }

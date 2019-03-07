@@ -51,7 +51,9 @@ repository.
 
 | File                           | Description                                                    |
 |:-------------------------------|:---------------------------------------------------------------|
-| [`demo/`][demo]                | Default demo configuration files.                              |
+| [`demo/`][demo]                | Folder containing default demo data.                           |
+| [`demo/README.md`][demomd]     | Description of default demo data.                              |
+| [`demo/start.sh`][demosh]      | Starts default application demo.                               |
 | [`source/`][source]            | TypeScript source code folder.                                 |
 | [`source/client/`][client]     | Browser client, served by [`node`][node].                      |
 | [`source/model/`][model]       | Data types used by both [`client`][client] and [`node`][node]. |
@@ -61,7 +63,6 @@ repository.
 | [`source/node/Peer.ts`][peer]  | Class used to relay interactions with other [`nodes`][node].   |
 | [`www/`][www]                  | Static resources served by [`node server`][server].            |
 | [`Dockerfile`][dockerfile]     | Allows creation of container holding demo application.         |
-| [`start-demo.sh`][demosh]      | Starts default application demo.                               |
 
 ## Building and Running
 
@@ -76,7 +77,8 @@ $ git clone https://github.com/emanuelpalm/en-signature-chains-poc.git
 $ cd en-signature-chains-poc/
 $ npm install
 $ npm run build
-$ ./start-demo.sh
+$ cd demo/
+$ ./start.sh
 ```
 
 This will start three nodes, serving their clients via [`localhost:8080`](http://localhost:8080),
@@ -95,7 +97,7 @@ changed prior to building the container.
 
 [client]: source/client
 [demo]: demo
-[demosh]: start-demo.sh
+[demosh]: demo/start.sh
 [dockerfile]: Dockerfile
 [model]: source/model
 [node]: source/node

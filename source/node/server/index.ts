@@ -85,7 +85,7 @@ export class Server {
         return new Promise(resolve => {
             this.serverFiles.close()
                 .then(() => this.serverRPC.close())
-                .then(() => this.server.close(resolve));
+                .then(() => this.server.close(() => resolve()));
         });
     }
 

@@ -55,7 +55,7 @@ export class NodeToken extends Widget implements Node<xnet.Token> {
             $token.classList.add("en-token");
 
             const tokenTemplate = this.context.model.tokenTemplates()
-                .findByKind(this.token.type)[0];
+                .getByType(this.token.type);
             let createValueElement: (label: string, value: string) => HTMLElement;
             if (this.isQualified) {
                 createValueElement = (label: string, value?: string) => {
@@ -76,9 +76,9 @@ export class NodeToken extends Widget implements Node<xnet.Token> {
                         }
                         if (field.referenceToType !== undefined) {
                             const references = this.context.model.tokens()
-                                .findByKind(field.referenceToType, 100)
-                                .map(token => token.id)
-                                .filter(id => id !== undefined) as string[];
+                                .getByType(field.referenceToType, 100)
+                                .filter(token => token.id !== undefined)
+                                .map(token => `${token.type} (${token.id})`) as string[];
                             if (references.length === 0) {
                                 references.push("");
                             }
@@ -101,16 +101,13 @@ export class NodeToken extends Widget implements Node<xnet.Token> {
                             $value.appendChild($option);
                         }
                     }
-                    else if (options.length === 1 && value !== undefined) {
+                    else if (options.length === 1) {
                         $value = document.createElement("div");
-                        $value.textContent = value;
+                        $value.textContent = value || options[0];
                     }
                     else {
-                        $value = document.createElement("input");
-                        $value.setAttribute("type", "text");
-                        if (value !== undefined) {
-                            $value.value = value;
-                        }
+                        $value = document.createElement("div");
+                        $value.classList.add("empty");
                     }
                     $value.classList.add("value");
                     return $value;

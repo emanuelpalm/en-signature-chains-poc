@@ -6,10 +6,6 @@ export class WidgetToken extends Widget {
         super();
     }
 
-    public isQualified(): boolean {
-        return xnet.isTokenQualified(this.token);
-    }
-
     public tokenize(): xnet.Token {
         return Any.clone(this.token);
     }

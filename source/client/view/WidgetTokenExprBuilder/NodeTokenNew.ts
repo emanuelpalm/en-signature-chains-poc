@@ -15,7 +15,9 @@ export class NodeTokenNew extends Widget implements Node<xnet.Token | null> {
         super("token");
         this.select = new WidgetSelect(
             (option: TokenTemplate) => option.type,
-            context.model.tokenTemplates().slice(),
+            context.model.tokenTemplates()
+                .slice()
+                .filter(template => template.isCreatable),
         );
     }
 

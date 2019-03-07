@@ -23,44 +23,6 @@ export class DataUsers
     }
 
     /**
-     * Searches for users with names matching any word in `terms`, which is
-     * assumed to contain several keywords separated by spacing characters.
-     *
-     * @param terms Search terms.
-     * @param limit Maximum number of desired search results.
-     * @param exclude Users to exclude from search.
-     * @return Promise of search result.
-     */
-    public async findByName(
-        terms: string,
-        limit: number,
-        exclude: User[]
-    ): Promise<User[]>
-    {
-        const results = [];
-        const terms0 = terms.toLowerCase().split(/\s+/);
-        for (const item of this.items()) {
-            if (exclude.find(item0 => item.key === item0.key)) {
-                continue;
-            }
-            const name = item.name.toLowerCase();
-            for (const term of terms0) {
-                if (term.length === 0) {
-                    continue;
-                }
-                if (name.indexOf(term) >= 0) {
-                    results.push(item);
-                    break;
-                }
-            }
-            if (results.length >= limit) {
-                break;
-            }
-        }
-        return results;
-    }
-
-    /**
      * Resolves the position of the user uniquely identified by `key`.
      *
      * If no matching user is available, a negative number is returned.

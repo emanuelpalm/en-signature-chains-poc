@@ -31,24 +31,22 @@ export class DataTokens
     }
 
     /**
-     * Searches for tokens with kinds matching any word in `terms`, which is
-     * assumed to contain several keywords separated by spacing characters.
+     * Searches for tokens with kinds matching `kind`.
      *
-     * @param owner User owning desired tokens.
-     * @param terms Search terms.
+     * @param kind Search terms.
      * @param limit Maximum number of desired search results.
      * @param exclude Tokens to exclude from search.
+     * @param owner User owning desired tokens.
      * @return Promise of search result.
      */
-    public findByKind(
-        terms: string,
+    public getByType(
+        kind: string,
         limit: number = 10,
         exclude: xnet.Token[] = [],
         owner: User | null = null,
     ): xnet.Token[]
     {
         const results = [];
-        const terms0 = terms.toLowerCase().split(/\s+/);
         for (const [user, token] of this.items()) {
             if (exclude.find(token0 => xnet.isTokenQualificationOf(token, token0))) {
                 continue;
@@ -56,15 +54,8 @@ export class DataTokens
             if (owner !== null && owner.key !== user.key) {
                 continue;
             }
-            const type = token.type.toLowerCase();
-            for (const term of terms0) {
-                if (term.length === 0) {
-                    continue;
-                }
-                if (type.indexOf(term) >= 0) {
-                    results.push(token);
-                    break;
-                }
+            if (token.type === kind) {
+                results.push(token);
             }
             if (results.length >= limit) {
                 break;

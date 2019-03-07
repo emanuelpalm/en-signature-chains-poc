@@ -12,14 +12,14 @@ onInterrupt() {
     done
 }
 
-npm start demo/supplier.json &
-PIDS+=`echo $!`
+DEMO_FOLDER=`pwd`
 
-npm start demo/assembly.json &
-PIDS+=`echo $!`
+cd ..
 
-npm start demo/carrier.json &
-PIDS+=`echo $!`
-
+for FILE in $(find $DEMO_FOLDER -iname "*.json");
+do
+    npm start "$FILE" &
+    PIDS+=`echo $!`
+done
 
 cat # Wait for interrupt

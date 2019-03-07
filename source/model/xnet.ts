@@ -333,6 +333,9 @@ export namespace xnet {
      * @returns Whether given `Expression` is qualified.
      */
     export function isExpressionQualified(expr: Expression): boolean {
+        if (expr === null) {
+            return true;
+        }
         if (isExpressionToken(expr)) {
             return isTokenQualified(expr);
         }

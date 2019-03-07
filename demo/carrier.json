@@ -41,22 +41,6 @@
     {
       "host": "localhost",
       "port": 8085,
-      "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAK/L0valDPbOn1cpGRsnKwPL+RX+u8XW\nkIeaKaWFqBbuJSNUossy6fZfFK+MUbTPP1PVOhrREFZB7igh3405HUcCAwEAAQ==\n-----END PUBLIC KEY-----",
-      "user": {
-        "name": "Cross-Dock",
-        "key": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAK/L0valDPbOn1cpGRsnKwPL+RX+u8XWkIeaKaWFqBbuJSNUossy6fZfFK+MUbTPP1PVOhrREFZB7igh3405HUcCAwEAAQ==",
-        "keyAlgorithm":"rsa",
-        "attributes": {
-          "country": "SE",
-          "region": "Skåne",
-          "locality": "Malmö",
-          "organization": "Carrier AB"
-        }
-      }
-    },
-    {
-      "host": "localhost",
-      "port": 8087,
       "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALUEFjB8Z0L8R63P2w9H4pWDa362a1Qy\ncQtXDhWq6FuRlpPXtoOifzJZMqP0Pymn40uL0WADbQVd4FRhuwVBWT0CAwEAAQ==\n-----END PUBLIC KEY-----",
       "user": {
         "name": "Supplier",
@@ -74,7 +58,7 @@
   ],
   "tokenTemplates": [
     {
-      "type": "component-transport",
+      "type": "XTB: Transport Booking",
       "data": {
         "Type": {
           "default": "X",
@@ -93,10 +77,23 @@
           "options": ["2019-03-20 11:30:00", "2019-03-21 16:15:00", "2019-03-22 09:45:00"]
         }
       },
+      "isCreatable": false,
       "isQualifiable": true
     },
     {
-      "type": "component-sequencing",
+      "type": "XTT: Tentative Payment",
+      "data": {
+        "Amount": {
+          "default": "7800 x 200",
+          "options": ["7800 x 100", "7800 x 200", "7800 x 300"]
+        }
+      },
+      "isCreatable": false,
+      "isQualifiable": false
+    },
+
+    {
+      "type": "XTC: Transport Confirmation",
       "data": {
         "Type": {
           "default": "X",
@@ -105,9 +102,39 @@
         "Units": {
           "default": "200",
           "options": ["100", "200", "300"]
+        },
+        "Time of Delivery": {
+          "default": "2019-03-20 11:30:00",
+          "options": ["2019-03-20 11:30:00", "2019-03-21 16:15:00", "2019-03-22 09:45:00"]
         }
       },
-      "isQualifiable": false
+      "isCreatable": true,
+      "isQualifiable": true
+    },
+
+    {
+      "type": "XTO: Transport Completion",
+      "data": {
+        "Transport": {
+          "referenceToType": "XTC: Transport Confirmation"
+        }
+      },
+      "isCreatable": true,
+      "isQualifiable": true
+    },
+
+    {
+      "type": "XTP: Payment",
+      "data": {
+        "Payment": {
+          "referenceToType": "XTT: Tentative Payment"
+        },
+        "Transport": {
+          "referenceToType": "XTO: Transport Confirmation"
+        }
+      },
+      "isCreatable": true,
+      "isQualifiable": true
     }
   ]
 }

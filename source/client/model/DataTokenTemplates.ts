@@ -23,37 +23,18 @@ export class DataTokenTemplates
     }
 
     /**
-     * Searches for token templates with kinds matching any word in `terms`,
-     * which is assumed to contain several keywords separated by spacing
-     * characters.
+     * Gets token templates with types matching `type`.
      *
-     * @param terms Search terms.
-     * @param limit Maximum number of desired search results.
+     * @param type Type searched for.
      * @return Promise of search result.
      */
-    public findByKind(
-        terms: string,
-        limit: number = 10,
-    ): TokenTemplate[]
-    {
-        const results = [];
-        const terms0 = terms.toLowerCase().split(/\s+/);
+    public getByType(type: string,): TokenTemplate | undefined {
         for (const template of this.items()) {
-            const kind = template.type.toLowerCase();
-            for (const term of terms0) {
-                if (term.length === 0) {
-                    continue;
-                }
-                if (kind.indexOf(term) >= 0) {
-                    results.push(template);
-                    break;
-                }
-            }
-            if (results.length >= limit) {
-                break;
+            if (template.type === type) {
+                return template;
             }
         }
-        return results;
+        return undefined;
     }
 
     /**
@@ -67,7 +48,7 @@ export class DataTokenTemplates
         if (xnet.isTokenQualified(token)) {
             return false;
         }
-        const tokenTemplate = this.findByKind(token.type, 1)[0];
+        const tokenTemplate = this.getByType(token.type);
         return tokenTemplate !== undefined && tokenTemplate.isQualifiable;
     }
 
@@ -84,7 +65,7 @@ export class DataTokenTemplates
         if (xnet.isTokenQualified(token)) {
             return Any.clone(token);
         }
-        const tokenTemplate = this.findByKind(token.type, 1)[0];
+        const tokenTemplate = this.getByType(token.type);
         if (tokenTemplate === undefined || !tokenTemplate.isQualifiable) {
             throw new Error("Token not qualifiable: " + JSON.stringify(token));
         }

@@ -11,6 +11,12 @@ export interface TokenTemplate {
     idPrefix?: string;
 
     /**
+     * Whether or not tokens of the described type may be created by the current
+     * user.
+     */
+    isCreatable: boolean;
+
+    /**
      * Whether or not tokens of the described type may be qualified by the
      * current user.
      */
@@ -36,6 +42,7 @@ export interface TokenTemplate {
 export function isTokenTemplate(any: any): any is TokenTemplate {
     return typeof any === "object" && any !== null
         && (any.idPrefix === undefined || typeof any.idPrefix === "string")
+        && typeof any.isCreatable === "boolean"
         && typeof any.isQualifiable === "boolean"
         && typeof any.type === "string"
         && typeof any.data === "object" && any.data !== null

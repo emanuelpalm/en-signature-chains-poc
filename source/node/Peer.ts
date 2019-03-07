@@ -30,7 +30,9 @@ export class Peer {
                             reject(error);
                         }
                     },
-                    Err(error) { reject(error) },
+                    Err(error) {
+                        reject(error)
+                    },
                 })));
         };
 
@@ -120,11 +122,54 @@ export class Peer {
                 res.end();
             }
         ));
+        this.router.on("POST", "/exchanges", (req, res) => parse(req).then(
+            data => {
+                if (!xnet.isExchange(data)) {
+                    res.writeHead(400, "Not Exchange");
+                    res.end();
+                    return;
+                }
+                const acceptor = model.users().getByKey(data.acceptance.acceptor);
+                if (acceptor === undefined) {
+                    res.writeHead(400, "Sender Unkown");
+                    res.end();
+                    return;
+                }
+                const proposer = model.users().getByKey(data.acceptance.proposal.proposer);
+                if (proposer === undefined) {
+                    res.writeHead(400, "Proposer Unknown");
+                    res.end();
+                    return;
+                }
+                if (!self.verifyAcceptance(data.acceptance)) {
+                    res.writeHead(400, "Bad Signatures");
+                    res.end();
+                    return;
+                }
+                this.model.exchanges().splice(0, 0, data);
+                const proposal = data.acceptance.proposal;
+                const tokens = this.model.tokens();
+                xnet.getTokensFrom(proposal.wants).forEach(token => {
+                    tokens.register(proposer, token);
+                });
+                xnet.getTokensFrom(proposal.gives).forEach(token => {
+                    tokens.register(acceptor, token);
+                });
+            },
+            error => {
+                model.log().push({
+                    title: "Incoming Exchange Error",
+                    data: error,
+                });
+                res.writeHead(400, "Exchange Error");
+                res.end();
+            }
+        ))
     }
 
     public close(): Promise<void> {
         return new Promise(resolve => {
-            this.server.close(resolve);
+            this.server.close(() => resolve());
         });
     }
 
@@ -136,57 +181,68 @@ export class Peer {
         const onError = (description: string) => {
             this.logError("Proposal Error", {description, proposal}, proposal);
         };
-        try {
-            if (proposal.receiver === undefined) {
-                return onError("Proposal receiver not set.");
-            }
-            if (proposal.proposer === undefined) {
-                return onError("Proposal sender not set.");
-            }
-            if (!xnet.isProposalSatisfiable(proposal)) {
-                return onError("Proposal not satisfiable.");
-            }
-
-            this.model.proposals().updateProposal(proposal, ProposalStatus.Sent);
-            const proposal0 = this.signProposal({
-                proposer: proposal.proposer.key,
-                wants: proposal.wants,
-                gives: proposal.gives,
-                definition: undefined,
-                predecessor: Any.mapIfNotEmpty(this.model.exchanges()
-                        .getPredecessorFor(proposal.receiver, proposal.proposer),
-                    exchange => exchange.hash
-                ),
-            });
-            const [host, port] = this.getHostAndPortByReceiverKey(proposal.receiver.key);
-            const payload = JSON.stringify(proposal0);
-            const request = http.request({
-                host,
-                method: "POST",
-                path: "/proposals",
-                port,
-                headers: {
-                    "Content-Length": Buffer.byteLength(payload),
-                    "Content-Type": "application/json",
-                },
-            });
-            request.on("error", error => {
-                this.logError("Proposal Error", error, proposal);
-            });
-            request.on("response", (response: http.IncomingMessage) => {
-                const status = response.statusCode || 0;
-                if (status < 200 || status > 299) {
-                    this.logError("Proposal Error", {
-                        status: response.statusCode + " " + response.statusMessage,
-                        headers: response.rawHeaders,
-                    }, proposal);
+        const f = async () => {
+            try {
+                if (proposal.receiver === undefined) {
+                    return onError("Proposal receiver not set.");
                 }
-            });
-            request.end(payload);
-        }
-        catch (error) {
-            this.logError("Proposal Error", error, proposal);
-        }
+                if (proposal.proposer === undefined) {
+                    return onError("Proposal sender not set.");
+                }
+                if (!xnet.isProposalSatisfiable(proposal)) {
+                    return onError("Proposal not satisfiable.");
+                }
+
+                const [host, port] = this.getHostAndPortByReceiverKey(proposal.receiver.key);
+
+                if (proposal.appendages !== undefined) {
+                    await Promise.all(proposal.appendages.map(a => {
+                        return this.sendExchangeTo(a, host, port);
+                    }));
+                }
+
+                this.model.proposals().updateProposal(proposal, ProposalStatus.Sent);
+                const proposal0 = this.signProposal({
+                    proposer: proposal.proposer.key,
+                    wants: proposal.wants,
+                    gives: proposal.gives,
+                    definition: undefined,
+                    predecessor: Any.mapIfNotEmpty(this.model.exchanges()
+                            .getPredecessorFor(proposal.receiver, proposal.proposer),
+                        exchange => exchange.hash
+                    ),
+                });
+
+                const payload = JSON.stringify(proposal0);
+                const request = http.request({
+                    host,
+                    method: "POST",
+                    path: "/proposals",
+                    port,
+                    headers: {
+                        "Content-Length": Buffer.byteLength(payload),
+                        "Content-Type": "application/json",
+                    },
+                });
+                request.on("error", error => {
+                    this.logError("Proposal Error", error, proposal);
+                });
+                request.on("response", (response: http.IncomingMessage) => {
+                    const status = response.statusCode || 0;
+                    if (status < 200 || status > 299) {
+                        this.logError("Proposal Error", {
+                            status: response.statusCode + " " + response.statusMessage,
+                            headers: response.rawHeaders,
+                        }, proposal);
+                    }
+                });
+                request.end(payload);
+            }
+            catch (error) {
+                this.logError("Proposal Error", error, proposal);
+            }
+        };
+        f();
     }
 
     public accept(proposal: Proposal) {
@@ -263,6 +319,41 @@ export class Peer {
 
     public discard(proposal: Proposal) {
         this.model.proposals().updateProposal(proposal, ProposalStatus.Discarded);
+    }
+
+    private sendExchangeTo(exchange: xnet.Exchange, host: string, port: number): Promise<void> {
+        const payload = JSON.stringify(exchange);
+        const request = http.request({
+            host,
+            method: "POST",
+            path: "/exchanges",
+            port,
+            headers: {
+                "Content-Length": Buffer.byteLength(payload),
+                "Content-Type": "application/json",
+            },
+        });
+        return new Promise((resolve, reject) => {
+            request.on("error", error => {
+                this.logError("Exchange Inform Error", error);
+                reject(error);
+            });
+            request.on("response", (response: http.IncomingMessage) => {
+                const status = response.statusCode || 0;
+                if (status < 200 || status > 299) {
+                    const error = {
+                        status: response.statusCode + " " + response.statusMessage,
+                        headers: response.rawHeaders,
+                    };
+                    this.logError("Exchange Inform Error", error);
+                    reject(error);
+                }
+                else {
+                    resolve();
+                }
+            });
+            request.end(payload);
+        });
     }
 
     private getHostAndPortByReceiverKey(key: xnet.ID): [string, number] {
