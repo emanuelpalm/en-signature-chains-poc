@@ -47,7 +47,7 @@ export class WidgetProposals extends WidgetListCached<Proposal, WidgetCard> {
                 }
                 else {
                     state = "qualified";
-                    formatQualified(this.model, item);
+                    formatQualified(this.model, item, from);
                 }
             }
             else {
@@ -66,9 +66,10 @@ export class WidgetProposals extends WidgetListCached<Proposal, WidgetCard> {
         }
         view.setState(state);
 
-        function formatQualified(model: Model, proposal: Proposal) {
+        function formatQualified(model: Model, proposal: Proposal, from: User) {
             view
                 .addAction("Discard", "proposal-discard")
+                .addAction("Modify", "proposal-qualify")
                 .addAction("Accept", "proposal-accept")
                 .setAction(0, async () => model.negotiator()
                     .discard(proposal)
@@ -76,7 +77,17 @@ export class WidgetProposals extends WidgetListCached<Proposal, WidgetCard> {
                     .catch(error => LogBroker.instance()
                         .publish({title: "Proposal Discard Failed", data: error}))
                 )
-                .setAction(1, () => model.negotiator()
+                .setAction(1, () => new ModalNewProposal(model, from, proposal)
+                    .open()
+                    .then((submitted: boolean) => {
+                        if (submitted) {
+                            toStateWithoutActions("handled");
+                        }
+                    })
+                    .catch(error => LogBroker.instance()
+                        .publish({title: "Proposal Submission Failed", data: error}))
+                )
+                .setAction(2, () => model.negotiator()
                     .accept(proposal)
                     .then(() => toStateWithoutActions("accepted"))
                     .catch(error => LogBroker.instance()
@@ -87,7 +98,7 @@ export class WidgetProposals extends WidgetListCached<Proposal, WidgetCard> {
         function formatUnqualified(model: Model, proposal: Proposal, from: User) {
             view
                 .addAction("Discard", "proposal-discard")
-                .addAction("Qualify", "proposal-qualify")
+                .addAction("Modify", "proposal-qualify")
                 .setAction(0, async () => model.negotiator()
                     .discard(proposal)
                     .then(() => toStateWithoutActions("discarded"))

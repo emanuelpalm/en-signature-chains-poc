@@ -97,7 +97,7 @@
         }
       },
       "isCreatable": false,
-      "isQualifiable": false
+      "isQualifiable": true
     },
 
     {
@@ -117,7 +117,7 @@
         }
       },
       "isCreatable": true,
-      "isQualifiable": false
+      "isQualifiable": true
     },
 
     {
@@ -128,7 +128,7 @@
         }
       },
       "isCreatable": true,
-      "isQualifiable": false
+      "isQualifiable": true
     },
 
     {
@@ -142,7 +142,7 @@
         }
       },
       "isCreatable": true,
-      "isQualifiable": false
+      "isQualifiable": true
     }
   ]
 }
