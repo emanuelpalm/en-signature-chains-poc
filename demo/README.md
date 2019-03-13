@@ -29,6 +29,12 @@ them, start the demo as described in the root [README.md][rmd] file. Each
 step represent one change in the rights and obligations between the initiator
 and receiver.
 
+The below diagram gives an overview of the same steps described in the above table.
+
+| ![](diagram.svg) |
+|:-:|
+| Diagram showing the partners part of the demonstration. A fourth implied partner is a municipal court decided upon by all parties when the assumed frame agreement was signed by the partners. The municipal court is assumed to be able to consider any completed exchanges as evidence in the case of any disputes. |
+
 [asm]: http://localhost:8080
 [sup]: http://localhost:8084
 [car]: http://localhost:8082

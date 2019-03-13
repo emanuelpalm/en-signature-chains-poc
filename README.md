@@ -97,6 +97,7 @@ changed prior to building the container.
 
 [client]: source/client
 [demo]: demo
+[demomd]: demo/README.md
 [demosh]: demo/start.sh
 [dockerfile]: Dockerfile
 [model]: source/model
