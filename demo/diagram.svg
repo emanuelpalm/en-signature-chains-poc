@@ -10,7 +10,7 @@
    version="1.1"
    viewBox="0 0 500 620"
    id="svg6470"
-   sodipodi:docname="exchange-network-demo.svg"
+   sodipodi:docname="diagram.svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    width="500"
    height="620">
@@ -22,12 +22,54 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
      id="defs6474">
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Mend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path1092"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#dcdcdc;stroke-opacity:0.99607843;fill:#dcdcdc;fill-opacity:0.99607843"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.6) rotate(180) translate(0,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Lend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path1086"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#949494;stroke-opacity:1;fill:#949494;fill-opacity:1"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(1.1) rotate(180) translate(1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker1328"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1210"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         style="fill-rule:evenodd;stroke:#949494;stroke-width:1pt;stroke-opacity:1;fill:#949494;fill-opacity:1"
+         transform="scale(0.4)" />
+    </marker>
     <marker
        inkscape:stockid="TriangleOutM"
        orient="auto"
@@ -182,8 +224,8 @@
      id="namedview6472"
      showgrid="false"
      inkscape:zoom="1.3645161"
-     inkscape:cx="220.68558"
-     inkscape:cy="280.68558"
+     inkscape:cx="250"
+     inkscape:cy="310"
      inkscape:window-x="83"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -201,10 +243,8 @@
      y="355" />
   <path
      style="opacity:1;fill:#f0f0f0;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     d="M 10,35 V 145 H 310 V 35 Z"
-     id="rect8528"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="ccccc" />
+     d="M 20 35 A 10 10 0 0 0 10 45 L 10 135 A 10 10 0 0 0 20 145 L 300 145 A 10 10 0 0 0 310 135 L 310 45 A 10 10 0 0 0 300 35 L 20 35 z "
+     id="rect8528" />
   <path
      inkscape:connector-curvature="0"
      id="path8744"
@@ -218,11 +258,9 @@
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="cc" />
   <path
-     sodipodi:nodetypes="ccccc"
-     inkscape:connector-curvature="0"
-     id="path8736"
-     d="M 320,35 V 145 H 490 V 35 Z"
-     style="opacity:1;fill:#f0f0f0;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+     style="opacity:1;fill:#f0f0f0;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     d="M 330 35 A 10 10 0 0 0 320 45 L 320 135 A 10 10 0 0 0 330 145 L 480 145 A 10 10 0 0 0 490 135 L 490 45 A 10 10 0 0 0 480 35 L 330 35 z "
+     id="path8736" />
   <path
      sodipodi:nodetypes="cc"
      inkscape:connector-curvature="0"
@@ -237,7 +275,7 @@
      style="fill:#dee0e6" />
   <g
      id="g8503"
-     transform="translate(119,-3)">
+     transform="translate(119,17)">
     <circle
        id="circle6437"
        r="19"
@@ -258,7 +296,7 @@
      style="fill:#dee0e6" />
   <g
      id="g8499"
-     transform="translate(6,58)">
+     transform="translate(6,78)">
     <circle
        id="circle6445"
        r="19"
@@ -281,17 +319,17 @@
      id="text4327"
      xml:space="preserve"
      style="font-size:medium;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;stroke-width:3.77999997px"
-     y="119.31448"
+     y="65.314484"
      x="180.86722"><tspan
        style="font-size:10.66666698px;text-align:center;text-anchor:middle;stroke-width:3.77999997px"
        id="tspan4325"
        text-align="center"
        font-size="8px"
-       y="119.31448"
+       y="65.314484"
        x="159.70573">Carrier</tspan></text>
   <g
      id="g8491"
-     transform="translate(-26,-145)">
+     transform="translate(-26,-125)">
     <circle
        id="circle6441"
        r="19"
@@ -308,17 +346,17 @@
      id="text4319"
      xml:space="preserve"
      style="font-size:8.44444466px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;stroke-width:3.77999997px"
-     y="118.28062"
+     y="64.280617"
      x="277.53125"><tspan
        style="font-size:10.66666698px;text-align:center;text-anchor:middle;stroke-width:3.77999997px"
        id="tspan4317"
        text-align="center"
        font-size="8px"
-       y="118.28062"
+       y="64.280617"
        x="259.65363">Supplier</tspan></text>
   <text
      x="422.48438"
-     y="118.28062"
+     y="64.280617"
      font-size="7.5px"
      letter-spacing="0px"
      word-spacing="0px"
@@ -326,14 +364,14 @@
      xml:space="preserve"
      id="text4356"><tspan
        x="404.60678"
-       y="118.28062"
+       y="64.280617"
        font-size="8px"
        text-align="center"
        id="tspan4354"
        style="font-size:10.66666698px;text-align:center;text-anchor:middle;stroke-width:3.77999997px">Municipal Court</tspan></text>
   <g
      id="g8495"
-     transform="translate(38,-3)">
+     transform="translate(38,17)">
     <circle
        id="circle6433"
        r="19"
@@ -350,34 +388,34 @@
      id="text4323"
      xml:space="preserve"
      style="font-size:medium;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;stroke-width:3.77999997px"
-     y="119.31448"
+     y="65.314484"
      x="85.143227"><tspan
        style="font-size:10.66666698px;text-align:center;letter-spacing:-0.06px;text-anchor:middle;stroke-width:3.77999997px"
        id="tspan4321"
        text-align="center"
        font-size="8px"
-       y="119.31448"
+       y="65.314484"
        x="60.088539">Assembly Plant</tspan></text>
   <text
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:7.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#5a5a5a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     x="8.6914062"
+     x="14.691406"
      y="26"
      id="text8734"><tspan
        sodipodi:role="line"
        id="tspan8732"
-       x="8.6914062"
+       x="14.691406"
        y="26"
        style="font-size:13.33333302px;fill:#5a5a5a;fill-opacity:1">Contractual Partners</tspan></text>
   <text
      id="text8740"
      y="26"
-     x="318.69141"
+     x="324.69141"
      style="font-style:normal;font-weight:normal;font-size:7.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#5a5a5a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      xml:space="preserve"><tspan
        style="font-size:13.33333302px;fill:#5a5a5a;fill-opacity:1"
        y="26"
-       x="318.69141"
+       x="324.69141"
        id="tspan8738"
        sodipodi:role="line">Implied Adjudicator</tspan></text>
   <rect
