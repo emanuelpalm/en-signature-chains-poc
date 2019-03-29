@@ -37,12 +37,10 @@ made to reduce implementation effort. The delimitations are listed below.
   in the same `.json` file as the static user data already mentioned.
 - __Definitions are ignored during verification__. One primary reason for using the Signature Chain
   data structure is being able to verify the predecessor and definitions of each record. Currently,
-  however, definitions are not verified.
+  however, definitions are not verified. The current state could be be assumed to imply that all
+  token definitions are well-known to all participants.
 - __Predecessors cannot be configured.__ Rather, any previous exchange between the same two parties
   is always chosen as the predecessor of any new exchange.
-- __Tokens cannot be given away for nothing.__ Currently, there is no well-defined way of
-  specifying that nothing is wanted or given, which means that unless a special token representing
-  nothing is specified, there is no way for any party to give things away for free.
 
 ## Code Organization
 
