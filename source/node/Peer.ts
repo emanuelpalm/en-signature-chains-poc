@@ -84,8 +84,8 @@ export class Peer {
                     res.end();
                     return;
                 }
-                const acceptor = model.users().getByKey(data.acceptor);
-                if (acceptor === undefined) {
+                const receiver = model.users().getByKey(data.proposal.receiver);
+                if (receiver === undefined) {
                     res.writeHead(400, "Sender Unknown");
                     res.end();
                     return;
@@ -98,7 +98,7 @@ export class Peer {
                 }
                 if (!self.verifyAcceptance(data)) {
                     model.proposals().updateProposal({
-                        receiver: acceptor,
+                        receiver,
                         proposer: me,
                         gives: data.proposal.gives,
                         wants: data.proposal.wants,
@@ -110,7 +110,7 @@ export class Peer {
                     res.end();
                     return;
                 }
-                self.ratifyAcceptance(data, me, acceptor);
+                self.ratifyAcceptance(data, me, receiver);
                 res.writeHead(204, "No Content");
                 res.end();
             },
@@ -130,8 +130,8 @@ export class Peer {
                     res.end();
                     return;
                 }
-                const acceptor = model.users().getByKey(data.acceptance.acceptor);
-                if (acceptor === undefined) {
+                const receiver = model.users().getByKey(data.acceptance.proposal.receiver);
+                if (receiver === undefined) {
                     res.writeHead(400, "Sender Unkown");
                     res.end();
                     return;
@@ -154,7 +154,7 @@ export class Peer {
                         tokens.register(proposer, token);
                     });
                     xnet.getTokensFrom(proposal.gives).forEach(token => {
-                        tokens.register(acceptor, token);
+                        tokens.register(receiver, token);
                     });
                 }
             },
@@ -228,6 +228,7 @@ export class Peer {
                 proposer: proposal.proposer.key,
                 wants: proposal.wants,
                 gives: proposal.gives,
+                receiver: proposal.receiver.key,
                 definition: undefined,
                 predecessor: Any.mapIfNotEmpty(this.model.exchanges()
                         .getPredecessorFor(proposal.receiver, proposal.proposer),
@@ -291,11 +292,11 @@ export class Peer {
                     proposer: proposal.proposer.key,
                     wants: proposal.wants,
                     gives: proposal.gives,
+                    receiver: proposal.receiver.key,
                     definition: proposal.definition,
                     predecessor: proposal.predecessor,
                     signature: proposal.signature,
                 },
-                acceptor: proposal.receiver.key,
             });
             const [host, port] = this.getHostAndPortByReceiverKey(
                 acceptance.proposal.proposer
@@ -473,11 +474,11 @@ export class Peer {
         if (!this.verifyProposal(acceptance.proposal)) {
             return false;
         }
-        const acceptor = this.model.users().getByKey(acceptance.acceptor);
-        if (acceptor === undefined) {
+        const receiver = this.model.users().getByKey(acceptance.proposal.receiver);
+        if (receiver === undefined) {
             return false;
         }
-        const publicKey = this.model.users().getPublicKeyOf(acceptor);
+        const publicKey = this.model.users().getPublicKeyOf(receiver);
         if (publicKey === undefined) {
             return false;
         }

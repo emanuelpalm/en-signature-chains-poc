@@ -15,14 +15,6 @@ export namespace xnet {
         proposal: Proposal;
 
         /**
-         * The public key of the user that accepted `proposal`.
-         *
-         * This user gives up the tokens in `proposal.want`, and receives
-         * ownership of the tokens in `proposal.give`.
-         */
-        acceptor: ID;
-
-        /**
          * The signature of the `acceptor`.
          */
         signature: Signature;
@@ -122,6 +114,14 @@ export namespace xnet {
          * if any.
          */
         gives: Expression,
+
+        /**
+         * The public key of the user that is to receive `proposal`.
+         *
+         * This user gives up the tokens in `proposal.want`, and receives
+         * ownership of the tokens in `proposal.give`.
+         */
+        receiver: ID;
 
         /**
          * Identifies a contract or other type definition.
@@ -246,7 +246,6 @@ export namespace xnet {
     export function isAcceptance(any: any): any is Acceptance {
         return typeof (<Acceptance>any) === "object" && (<Acceptance>any) !== null
             && isProposal((<Acceptance>any).proposal)
-            && isID((<Acceptance>any).acceptor)
             && isSignature((<Acceptance>any).signature);
     }
 
@@ -654,6 +653,7 @@ export namespace xnet {
             && isID((<Proposal>any).proposer)
             && isExpression((<Proposal>any).wants)
             && isExpression((<Proposal>any).gives)
+            && isID((<Proposal>any).receiver)
             && ((<Proposal>any).definition === undefined
                 || isHash((<Proposal>any).definition))
             && ((<Proposal>any).predecessor === undefined

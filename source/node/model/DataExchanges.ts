@@ -22,7 +22,7 @@ export class DataExchanges
         return undefined;
 
         function isPredecessorFor(exchange: xnet.Exchange, a: User, b: User): boolean {
-            const x = exchange.acceptance.acceptor;
+            const x = exchange.acceptance.proposal.receiver;
             const y = exchange.acceptance.proposal.proposer;
             return a.key !== b.key
                 && (x === a.key || x === b.key)

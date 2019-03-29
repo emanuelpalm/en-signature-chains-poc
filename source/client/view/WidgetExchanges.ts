@@ -40,8 +40,8 @@ export class WidgetExchanges extends WidgetListCached<xnet.Exchange, WidgetCard>
                 .setEntry(1, new WidgetExpression(item.acceptance.proposal.gives)))
             .setEntry(4, new WidgetLink("#" + item.acceptance.proposal.proposer, "user",
                 [item.acceptance.proposal.proposer]))
-            .setEntry(5, new WidgetLink("#" + item.acceptance.acceptor, "user",
-                [item.acceptance.acceptor]));
+            .setEntry(5, new WidgetLink("#" + item.acceptance.proposal.receiver, "user",
+                [item.acceptance.proposal.receiver]));
 
         this.model.users()
             .nameByKey(item.acceptance.proposal.proposer)
@@ -53,11 +53,11 @@ export class WidgetExchanges extends WidgetListCached<xnet.Exchange, WidgetCard>
             });
 
         this.model.users()
-            .nameByKey(item.acceptance.acceptor)
+            .nameByKey(item.acceptance.proposal.receiver)
             .then(name => {
                 if (typeof name === "string") {
                     view.setEntry(5, new WidgetLink(name, "user",
-                        [item.acceptance.acceptor]));
+                        [item.acceptance.proposal.receiver]));
                 }
             });
     }
