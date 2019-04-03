@@ -62,7 +62,7 @@ repository.
 | [`www/`][www]                  | Static resources served by [`node server`][server].            |
 | [`Dockerfile`][dockerfile]     | Allows creation of container holding demo application.         |
 
-## Building and Running
+## Building, Running and Testing
 
 ### POSIX Environment
 
@@ -88,10 +88,12 @@ If none of the above mentioned environments are available, of if you fail to get
 properly, an alternative is to use a [Docker](https://www.docker.com) container. We provide a
 [`Dockerfile`][dockerfile] in the repository root folder.
 
-Note that the Dockerfile will copy over the [`demo/`][demo] folder and the
-[`start-demo.sh`][demosh] file into the created container, which means that if any other
+Note that the Dockerfile will copy over the [`demo/`][demo] folder and use its
+[`start.sh`][demosh] file as execution entry point, which means that if any other
 configuration is desired than the one provided for the default demo, those files need to be
 changed prior to building the container.
+
+Please look at the [demo instructions][demomd] for more details about how the demo works.
 
 [client]: source/client
 [demo]: demo
